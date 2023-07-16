@@ -17,7 +17,7 @@ group = projGroupId
 version = projVersion
 
 enum class Artifacts(val artifact: String, val version: String) {
-    BIN_PACKING("bin-packing", "0.4.0"),
+    BIN_PACKING("bin-packing", "0.5.0"),
     BIN_TAG("bin-tag", "0.1.0"),
     TIMER("timer", "0.3.0"),
     UNIFONT("unifont", "15.0.06")
