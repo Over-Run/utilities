@@ -6,6 +6,6 @@ Utilities Bill of Materials.
 
 ```groovy
 dependencies {
-    implementation(platform("io.github.over-run:utilities:0.1.0"))
+    implementation(platform("io.github.over-run:utilities:0.2.0"))
 }
 ```
