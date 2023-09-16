@@ -16,12 +16,27 @@ val developers: String by project
 group = projGroupId
 version = projVersion
 
-enum class Artifacts(val artifact: String, val version: String) {
-    BIN_PACKING("bin-packing", "0.5.0"),
-    BIN_TAG("bin-tag", "0.2.0"),
-    TIMER("timer", "0.3.0"),
-    UNIFONT("unifont", "15.0.06.1")
-}
+val binPackingVersion: String by project
+val binTagVersion: String by project
+val poolingVersion: String by project
+val timerVersion: String by project
+val unifontVersion: String by project
+
+data class Artifact(val artifact: String, val version: String)
+
+val BIN_PACKING = Artifact("bin-packing", binPackingVersion)
+val BIN_TAG = Artifact("bin-tag", binTagVersion)
+val POOLING = Artifact("pooling", poolingVersion)
+val TIMER = Artifact("timer", timerVersion)
+val UNIFONT = Artifact("unifont", unifontVersion)
+
+val utilities = arrayOf(
+    BIN_PACKING,
+    BIN_TAG,
+    POOLING,
+    TIMER,
+    UNIFONT
+)
 
 repositories {
     mavenCentral()
@@ -72,11 +87,17 @@ publishing {
                 withXml {
                     asElement().getElementsByTagName("dependencyManagement").item(0).apply {
                         asElement().getElementsByTagName("dependencies").item(0).apply {
-                            Artifacts.values().forEach {
+                            utilities.forEach {
                                 ownerDocument.createElement("dependency").also(::appendChild).apply {
-                                    appendChild(ownerDocument.createElement("groupId").also(::appendChild).apply { textContent = "io.github.over-run" })
-                                    appendChild(ownerDocument.createElement("artifactId").also(::appendChild).apply { textContent = it.artifact })
-                                    appendChild(ownerDocument.createElement("version").also(::appendChild).apply { textContent = it.version })
+                                    appendChild(
+                                        ownerDocument.createElement("groupId").also(::appendChild)
+                                            .apply { textContent = "io.github.over-run" })
+                                    appendChild(
+                                        ownerDocument.createElement("artifactId").also(::appendChild)
+                                            .apply { textContent = it.artifact })
+                                    appendChild(
+                                        ownerDocument.createElement("version").also(::appendChild)
+                                            .apply { textContent = it.version })
                                 }
                             }
                         }
@@ -115,7 +136,7 @@ signing {
 
 dependencies {
     constraints {
-        Artifacts.values().forEach {
+        utilities.forEach {
             api("io.github.over-run:${it.artifact}:${it.version}")
         }
     }
