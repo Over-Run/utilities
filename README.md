@@ -12,8 +12,8 @@ Utilities Bill of Materials.
 
 ## Usage
 
-```groovy
+```kotlin
 dependencies {
-    implementation(platform("io.github.over-run:utilities:0.4.0"))
+    implementation(platform("io.github.over-run:utilities:0.5.0"))
 }
 ```

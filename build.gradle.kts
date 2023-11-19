@@ -61,12 +61,9 @@ publishing {
             }
             developers {
                 developers.split(',')
-                    .map { it.split(':', limit = 3) }
-                    .forEach { (id1, name1, email1) ->
+                    .forEach { id1 ->
                         developer {
                             id.set(id1)
-                            name.set(name1)
-                            email.set(email1)
                         }
                     }
             }
