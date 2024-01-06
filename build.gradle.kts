@@ -18,25 +18,19 @@ version = projVersion
 
 val binPackingVersion: String by project
 val binTagVersion: String by project
-val poolingVersion: String by project
+val platformVersion: String by project
 val timerVersion: String by project
 val unifontVersion: String by project
 
 data class Artifact(val artifact: String, val version: String)
 
-val BIN_PACKING = Artifact("bin-packing", binPackingVersion)
-val BIN_TAG = Artifact("bin-tag", binTagVersion)
-val POOLING = Artifact("pooling", poolingVersion)
-val TIMER = Artifact("timer", timerVersion)
-val UNIFONT = Artifact("unifont", unifontVersion)
-
 val utilities = arrayOf(
-    BIN_PACKING,
-    BIN_TAG,
-    POOLING,
-    TIMER,
-    UNIFONT
-)
+    "bin-packing" to binPackingVersion,
+    "bin-tag" to binTagVersion,
+    "platform" to platformVersion,
+    "timer" to timerVersion,
+    "unifont" to unifontVersion
+).map { (artifact, version) -> Artifact(artifact, version) }
 
 repositories {
     mavenCentral()
